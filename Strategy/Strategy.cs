@@ -11,7 +11,7 @@ public class Strategy : TradingPlatform.BusinessLayer.Strategy
 
     [InputParameter("Account", 10)]
     public Account Account { get; set; }
-    
+
     [InputParameter("Range Bar Size (in Ticks)", 15)]
     public int RangeBarSize { get; set; } = 40;
 
@@ -37,6 +37,11 @@ public class Strategy : TradingPlatform.BusinessLayer.Strategy
         historicalData.NewHistoryItem += OnNewHistoryItem;
     }
 
+    protected override void OnStop()
+    {
+        historicalData.NewHistoryItem -= OnNewHistoryItem;
+    }
+
     private void OnNewHistoryItem(object sender, HistoryEventArgs e)
     {
         var orderParams = new PlaceOrderRequestParameters
@@ -53,11 +58,6 @@ public class Strategy : TradingPlatform.BusinessLayer.Strategy
         Core.PlaceOrder(orderParams);
     }
 
-    protected override void OnStop()
-    {
-        historicalData.NewHistoryItem -= OnNewHistoryItem;
-    }
-
     private void Flatten()
     {
         foreach (var position in Core.Positions.Where(PositionWithSameAccountAndSymbol())) position.Close();
@@ -68,7 +68,7 @@ public class Strategy : TradingPlatform.BusinessLayer.Strategy
     {
         return position => position.Account.Equals(Account) && position.Symbol.Equals(Symbol);
     }
-    
+
     private Func<Order, bool> OrderWithSameAccountAndSymbol()
     {
         return order => order.Account.Equals(Account) && order.Symbol.Equals(Symbol);
