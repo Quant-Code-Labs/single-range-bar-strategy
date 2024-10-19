@@ -18,9 +18,6 @@ public class Strategy : TradingPlatform.BusinessLayer.Strategy
     [InputParameter("# of Contracts", 20)]
     public int Contracts { get; set; } = 1;
 
-    [InputParameter("Max Profit", 25)]
-    public double MaxProfit { get; set; } = 100;
-
     public Strategy()
     {
         Name = "Single Range Bar";
