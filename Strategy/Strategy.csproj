@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>SingleRangeBar.Strategy</AssemblyName>
+        <RootNamespace>SingleRangeBar.Strategy</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="TradingPlatform.BusinessLayer">
+        <HintPath>..\..\..\..\..\Quantower\TradingPlatform\v1.141.7\bin\TradingPlatform.BusinessLayer.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <Target Name="CopyToQuantower" AfterTargets="Build">
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="C:\Quantower\Settings\Scripts\Strategies"/>
+    </Target>
+
+</Project>
