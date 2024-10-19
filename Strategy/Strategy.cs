@@ -39,13 +39,11 @@ public class Strategy : TradingPlatform.BusinessLayer.Strategy
 
     private void OnNewHistoryItem(object sender, HistoryEventArgs e)
     {
-        var side = historicalData[1][PriceType.Open] < historicalData[1][PriceType.Close] ? Side.Buy : Side.Sell;
-        
         var orderParams = new PlaceOrderRequestParameters
         {
             Account = Account,
             Symbol = Symbol,
-            Side = side,
+            Side = historicalData[1][PriceType.Open] < historicalData[1][PriceType.Close] ? Side.Buy : Side.Sell,
             TimeInForce = TimeInForce.Day,
             Quantity = Contracts,
             OrderTypeId = OrderType.Market
