@@ -10,7 +10,8 @@
 
     <ItemGroup>
       <Reference Include="TradingPlatform.BusinessLayer">
-        <HintPath>..\..\..\..\..\Quantower\TradingPlatform\v1.141.7\bin\TradingPlatform.BusinessLayer.dll</HintPath>
+        <HintPath>..\..\..\..\..\Quantower\TradingPlatform\v1.141.11\bin\TradingPlatform.BusinessLayer.dll</HintPath>
+        <Private>False</Private>
       </Reference>
     </ItemGroup>
 
